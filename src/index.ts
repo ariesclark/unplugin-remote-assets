@@ -21,11 +21,10 @@ async function download(url: URL): Promise<string> {
   const contentType = response.headers.get('content-type')
   const extension = mime.getExtension(contentType || 'application/octet-stream')
 
-  url.pathname = url.pathname.replace(/\.[^/.]+$/, '') + (extension ? `.${extension}` : '')
+  // url.pathname = url.pathname.replace(/\.[^/.]+$/, '') + (extension ? `.${extension}` : '')
 
-  let pathname = path.resolve('node_modules', '.cache', name, digest(url.origin), url.pathname.slice(1))
-  if (url.search)
-    pathname += url.search
+  const filename = `${digest(url.href.replace(url.origin, ''))}.${extension || 'bin'}`
+  const pathname = path.resolve('node_modules', '.cache', name, digest(url.origin), filename)
 
   await mkdir(path.dirname(pathname), { recursive: true })
   await writeFile(pathname, Buffer.from(await response.arrayBuffer()))
