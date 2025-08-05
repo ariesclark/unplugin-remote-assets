@@ -1,0 +1,115 @@
+{
+  "name": "unplugin-remote-assets",
+  "type": "module",
+  "version": "0.3.0",
+  "packageManager": "pnpm@10.11.0",
+  "description": "",
+  "license": "MIT",
+  "homepage": "https://github.com/antfu/unplugin-remote-assets#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antfu/unplugin-remote-assets.git"
+  },
+  "bugs": {
+    "url": "https://github.com/antfu/unplugin-remote-assets/issues"
+  },
+  "keywords": [
+    "unplugin",
+    "vite",
+    "vite-plugin",
+    "webpack",
+    "rollup",
+    "transform"
+  ],
+  "exports": {
+    ".": "./dist/index.js",
+    "./astro": "./dist/astro.js",
+    "./esbuild": "./dist/esbuild.js",
+    "./farm": "./dist/farm.js",
+    "./nuxt": "./dist/nuxt.js",
+    "./rollup": "./dist/rollup.js",
+    "./rspack": "./dist/rspack.js",
+    "./vite": "./dist/vite.js",
+    "./webpack": "./dist/webpack.js",
+    "./client": "./client.d.ts",
+    "./package.json": "./package.json"
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*",
+        "./*"
+      ]
+    }
+  },
+  "files": [
+    "client.d.ts",
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown -w",
+    "lint": "eslint .",
+    "play": "npm -C playground run dev",
+    "prepublishOnly": "npm run build",
+    "release": "bumpp && pnpm publish",
+    "start": "tsx src/index.ts",
+    "test": "vitest"
+  },
+  "peerDependencies": {
+    "@farmfe/core": ">=1",
+    "@nuxt/kit": "^3",
+    "@nuxt/schema": "^3",
+    "esbuild": "*",
+    "rollup": "^3",
+    "vite": ">=3",
+    "webpack": "^4 || ^5"
+  },
+  "peerDependenciesMeta": {
+    "@farmfe/core": {
+      "optional": true
+    },
+    "@nuxt/kit": {
+      "optional": true
+    },
+    "@nuxt/schema": {
+      "optional": true
+    },
+    "esbuild": {
+      "optional": true
+    },
+    "rollup": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    },
+    "webpack": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "mime": "^4.0.7",
+    "ohash": "^2.0.11",
+    "unplugin": "^2.3.4"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^4.13.2",
+    "@nuxt/kit": "^3.17.4",
+    "@nuxt/schema": "^3.17.4",
+    "@types/node": "^22.15.21",
+    "bumpp": "^10.1.1",
+    "eslint": "^9.27.0",
+    "nodemon": "^3.1.10",
+    "rollup": "^4.41.0",
+    "tsdown": "^0.12.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5.8.3",
+    "vite": "^6.3.5",
+    "vitest": "^3.1.4",
+    "webpack": "^5.99.9"
+  }
+}
