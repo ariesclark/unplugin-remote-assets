@@ -1,28 +1,12 @@
 # unplugin-remote-assets
+Bundle remote assets like images, fonts, and more.
 
 [![NPM version](https://img.shields.io/npm/v/unplugin-remote-assets?color=a1b858&label=)](https://www.npmjs.com/package/unplugin-remote-assets)
-
-Starter template for [unplugin](https://github.com/unjs/unplugin).
-
-## Template Usage
-
-To use this template, clone it down using:
-
-```bash
-npx degit unplugin/unplugin-remote-assets my-unplugin
-```
-
-And do a global replacement of `unplugin-remote-assets` with your plugin name.
-
-Then you can start developing your unplugin 🔥
-
-To test your plugin, run: `pnpm run dev`
-To release a new version, run: `pnpm run release`
 
 ## Install
 
 ```bash
-npm i unplugin-remote-assets
+pnpm i unplugin-remote-assets
 ```
 
 <details>
@@ -30,16 +14,14 @@ npm i unplugin-remote-assets
 
 ```ts
 // vite.config.ts
-import Starter from 'unplugin-remote-assets/vite'
+import remoteAssets from 'unplugin-remote-assets/vite'
 
 export default defineConfig({
   plugins: [
-    Starter({ /* options */ }),
+    remoteAssets({ /* options */ }),
   ],
 })
 ```
-
-Example: [`playground/`](./playground/)
 
 <br></details>
 
@@ -48,11 +30,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import Starter from 'unplugin-remote-assets/rollup'
+import remoteAssets from 'unplugin-remote-assets/rollup'
 
 export default {
   plugins: [
-    Starter({ /* options */ }),
+    remoteAssets({ /* options */ }),
   ],
 }
 ```
@@ -112,11 +94,53 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import Starter from 'unplugin-remote-assets/esbuild'
+import remoteAssets from 'unplugin-remote-assets/esbuild'
 
 build({
-  plugins: [Starter()],
+  plugins: [remoteAssets()],
 })
 ```
 
 <br></details>
+
+## Usage
+```ts
+// vite.config.js
+import remoteAssets from 'unplugin-remote-assets/vite'
+import { imagetools } from 'vite-imagetools'
+
+export default defineConfig({
+  plugins: [
+    remoteAssets({
+      // will only match non-valid URLs.
+      aliases: [
+        {
+          regex: /^(.+)/,
+          replacement: 'https://files.aries.fyi/$1'
+        }
+      ]
+    }),
+    // unplugin-remote-assets makes no assumptions about content,
+    // and can be paired with other plugins, ie: an optimizer.
+    imagetools({
+      defaultDirectives: () =>
+        new URLSearchParams({
+          quality: '90',
+          effort: 'max',
+          format: 'webp'
+        })
+    }),
+  ],
+})
+```
+
+```ts
+// was a png, but converted at build time to a webp via imagetools.
+import WebpImage from 'virtual:remote/2025/08/09/7ff1371c7f1556a4.png'
+
+// any search parameters are passed through.
+import AvifImage from 'virtual:remote/2025/08/09/7ff1371c7f1556a4.png?format=avif'
+
+// without alias, equivalent to above.
+import Image from 'virtual:remote/https://files.aries.fyi/2025/08/09/7ff1371c7f1556a4.png'
+```

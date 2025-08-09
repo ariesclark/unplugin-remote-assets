@@ -3,15 +3,15 @@
   "type": "module",
   "version": "0.4.0",
   "packageManager": "pnpm@10.11.0",
-  "description": "",
+  "description": "Remote Assets plugin for Vite, Rollup and more. Bundle remote assets like images, fonts, and more.",
   "license": "MIT",
-  "homepage": "https://github.com/antfu/unplugin-remote-assets#readme",
+  "homepage": "https://github.com/ariesclark/unplugin-remote-assets#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/antfu/unplugin-remote-assets.git"
+    "url": "git+https://github.com/ariesclark/unplugin-remote-assets.git"
   },
   "bugs": {
-    "url": "https://github.com/antfu/unplugin-remote-assets/issues"
+    "url": "https://github.com/ariesclark/unplugin-remote-assets/issues"
   },
   "keywords": [
     "unplugin",
